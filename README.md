@@ -65,6 +65,7 @@ Solution:
 
 ```javascript
 const centimetersToMeters = centimeters => centimeters / 100;
+const centimetersToKiloMeters = centimeters => centimeters / 1000 / 100;
 ```
 
 Screenshot:
@@ -362,11 +363,12 @@ Problem:
 Solution:
 
 ```javascript
-const task2 = (rowLength, columnLength, pattern1, pattern2) => console.log(
-  [...Array(Math.ceil(rowLength / 2))]
-  .map(() => `${pattern1(columnLength)}\n`)
-  .join(`${pattern2(columnLength)}\n`)
-);
+const task2 = (rowLength, columnLength, pattern1, pattern2) =>
+  console.log(
+    [...Array(Math.ceil(rowLength / 2))]
+    .map(() => `${pattern1(columnLength)}\n`)
+    .join(`${pattern2(columnLength)}\n`)
+  );
 ```
 Screenshot:
 
@@ -444,3 +446,47 @@ const task4 = () => {
 Screenshot:
 
 ![loops_4_img]
+
+
+[arrays_1_img]: ./images/arrays_1.png
+
+Lab #Arrays
+======
+
+**Task #1**
+-----------
+
+Problem:
+>Дано числовий масив розмірності N. Знайти кількість його локальних мінімумів. Локальним мінімумом називається елемент, значення якого менше від сусідів
+
+Solution:
+```javascript
+const task1 = input => {
+  let localMinAmount = 0;
+
+  for (let i = 0; i < input.length; i++) {
+    const hasLeft = typeof input[i - 1] !== 'undefined';
+    const hasRight = typeof input[i + 1] !== 'undefined';
+
+    let lessThanLeft = true;
+    let lessThanRight = true;
+
+    if (hasLeft) {
+      lessThanLeft = input[i] < input [i - 1];
+    }
+
+    if (hasRight) {
+      lessThanRight = input[i] < input [i + 1];
+    }
+
+    if (lessThanLeft && lessThanRight) {
+      localMinAmount++;
+    }
+  }
+
+  return localMinAmount;
+}
+```
+Screenshot:
+
+![arrays_1_img]
